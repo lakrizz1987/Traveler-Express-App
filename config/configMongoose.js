@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 function configMongoose(app){
-    mongoose.connect(`mongodb+srv://lakrizz:T22bytlVfjTQH3ls@cubicles.osi7cn4.mongodb.net/?retryWrites=true&w=majority`);
+    mongoose.connect(`mongodb+srv://trips:trips123@cluster0.pcxzblb.mongodb.net/?retryWrites=true&w=majority`);
     mongoose.set('strictQuery', true);
 
     const db = mongoose.connection;
