@@ -1,15 +1,19 @@
 const express = require('express')
 const configServer = require('./config/serverConfig');
 const configHandlebars = require('./config/configHbs');
+const configMongoose = require('./config/configMongoose');
+const router = require('./controlers/travelControler');
+
 
 const app = express();
-configHandlebars(app);
 
+configHandlebars(app);
+configMongoose(app);
+
+app.use(express.urlencoded({ extended: true }))
 app.use(express.static('public'));
 app.set('views', './view');
+app.use(router);
 
-app.get('/', (req,res)=>{
-    res.render('404')
-})
 
 app.listen(configServer.PORT, () => console.log(`Server is running on port ${configServer.PORT}...`));
