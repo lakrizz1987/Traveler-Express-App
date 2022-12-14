@@ -1,4 +1,4 @@
-body{
+body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -26,7 +26,7 @@ h1 {
     font-weight: bolder;
 }
 
-.rosa-img img{
+.rosa-img img {
     max-width: 180px;
 }
 
@@ -39,17 +39,19 @@ ul {
     gap: 10px;
 }
 
-ul li{
+ul li {
     margin: 10px;
     font-size: 18px;
 }
 
-ul li a{
-text-decoration: none;
-color :black
+ul li a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    font-size: 20px;
 }
 
-.main-footer{
+.main-footer {
     border-top: 5px solid black;
     margin-top: 25px;
     margin-bottom: 0;
@@ -59,17 +61,17 @@ color :black
     align-items: center;
 }
 
-.img-container-footer img{
+.img-container-footer img {
     max-width: 80px;
 }
 
-.copyrights{
+.copyrights {
     font-size: 12px;
     text-align: center;
     color: white;
     background-color: black;
 }
 
-.wraper-body{
+.wraper-body {
     padding: 20px 40px;
 }
