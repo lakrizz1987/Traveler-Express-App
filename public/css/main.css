@@ -2,6 +2,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Times New Roman', Times, serif;
 }
 
 
@@ -74,4 +75,24 @@ ul li a {
 
 .wraper-body {
     padding: 20px 40px;
+}
+
+.search-form{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+    gap: 10px;
+}
+
+.search-form input[type=text]{
+    max-width: 75%;
+    height: 40px;
+    margin: 0;
+}
+
+.search-form input[type=submit]{
+    max-width: 25%;
+    margin: 0;
 }

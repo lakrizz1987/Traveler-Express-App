@@ -1,0 +1,16 @@
+<main>
+    {{#if error}}
+    <span class="error">{{error.message}}</span>
+    {{/if}}
+    <h1 class="login-reg-title">Вход</h1>
+    <div class="form">
+        <form action='/login' method="POST">
+            <label for="username">Потребител</label>
+            <input type="text" id="username" name="username">
+
+            <label for="password">Парола</label>
+            <input type="password" id="password" name="password">
+            <input type="submit" value="ВХОД">
+        </form>
+    </div>
+</main>

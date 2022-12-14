@@ -1,0 +1,21 @@
+<main>
+  <h1 class="login-reg-title">Добави място</h1>
+  <div class="form">
+    <form action='/create' method="POST">
+      <label for="name">Име</label>
+      <input type="text" id="name" name="name">
+      <label for="name">Описание</label>
+      <textarea id="name" name="description"></textarea>
+      <label for="image">Снмка</label>
+      <input type="text" id="image" name="imageUrl">
+      <label for="difficulty">Категория</label>
+      <select id="difficulty" name="difficultyLevel">
+        <option value="1">Море</option>
+        <option value="2">Планина</option>
+        <option value="3">Град</option>
+        <option value="4">Село</option>
+      </select>
+      <input type="submit" value="ДОБАВИ">
+    </form>
+  </div>
+</main>
