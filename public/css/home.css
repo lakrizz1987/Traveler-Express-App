@@ -1,0 +1,13 @@
+.home-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+.home-container p{
+    max-width: 700px;
+    font-size: 32px;
+}
+
