@@ -15,10 +15,14 @@ const TripSchema = new mongoose.Schema({
         required: true,
         validate: /^https?/
     },
-    creator:{
-        type: mongoose.Types.ObjectId,
-        ref: 'User'
+    category: {
+        type: String,
+        required: true
     }
+    /* creator:{
+         type: mongoose.Types.ObjectId,
+         ref: 'User'
+     } */
 });
 
 module.exports = mongoose.model('Trip', TripSchema);

@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const Trip = require('../models/tripModel');
 
 const router = Router();
 
@@ -16,6 +17,15 @@ router.get('/register', (req, res) => {
 
 router.get('/create', (req, res) => {
     res.render('create')
+})
+
+router.post('/create', (req, res) => {
+    console.log(req.body)
+    const trip = new Trip({ ...req.body })
+
+    trip.save()
+        .then(() => res.redirect('/trips'))
+        .catch((err) => alert(err.message))
 })
 
 router.get('/trips', (req, res) => {
