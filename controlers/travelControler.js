@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const Trip = require('../models/tripModel');
+const service = require('../services/services');
 
 const router = Router();
 
@@ -28,8 +29,10 @@ router.post('/create', (req, res) => {
         .catch((err) => alert(err.message))
 })
 
-router.get('/trips', (req, res) => {
-    res.render('trips')
+router.get('/trips', async (req, res) => {
+    const trips = await service.getAllTrips();
+    console.log(trips)
+    res.render('trips', { trips: trips })
 })
 
 

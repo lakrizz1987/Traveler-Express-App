@@ -4,28 +4,16 @@
         <input type="submit" value="Търси">
     </form>
 
+    {{#each trips}}
     <section class="article-container">
-
+        <h1>{{name}}</h1>
         <div class="img-article-container">
-            <img src="https://i.pinimg.com/736x/3a/c4/a7/3ac4a7769a545b8d5cbb41abbee24675.jpg" alt="img">
+            <img src="{{imageUrl}}" alt="img">
         </div>
-
-        <p class="article-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id modi quis exercitationem
-            eligendi ipsum deserunt possimus praesentium atque similique vitae ex quia repellat enim, fugiat quisquam
-            facere tenetur provident neque.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id modi quis
-            exercitationem
-            eligendi ipsum deserunt possimus praesentium atque similique vitae ex quia repellat enim, fugiat quisquam
-            facere tenetur provident neque.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id modi quis
-            exercitationem
-            eligendi ipsum deserunt possimus praesentium atque similique vitae ex quia repellat enim, fugiat quisquam
-            facere tenetur provident neque.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id modi quis
-            exercitationem
-            eligendi ipsum deserunt possimus praesentium atque similique vitae ex quia repellat enim, fugiat quisquam
-            facere tenetur provident neque.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Id modi quis
-            exercitationem
-            eligendi ipsum deserunt possimus praesentium atque similique vitae ex quia repellat enim, fugiat quisquam
-            facere tenetur provident neque.
-
+        <p class="article-text">{{description}}</p>
+        <span><a href="/details/{{_id}}" class="see-more-btn">ВИЖ ОЩЕ...</a></span></p>
     </section>
-    <span><a href="/details/11111" class="see-more-btn">ВИЖ ОЩЕ...</a></span></p>
+    <div class="border"></div>
+    {{/each}}
+
 </main>
