@@ -24,10 +24,13 @@
             <ul>
                 <li><a href="/">Начало</a></li>
                 <li><a href="/trips">Места</a></li>
-                <li><a href="/login">Вход</a></li>
-                <li><a href="/register">Регистрация</a></li>
-                <li><a href="/logout">Изход</a></li>
+                {{#if isLoged}}
                 <li><a href="/create">Добави място</a></li>
+                <li><a href="/logout">Изход</a></li>
+                {{else}}
+                <li><a href="/register">Регистрация</a></li>
+                <li><a href="/login">Вход</a></li>
+                {{/if}}
             </ul>
         </nav>
     </header>

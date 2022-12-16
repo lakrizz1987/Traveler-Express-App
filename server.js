@@ -5,6 +5,7 @@ const configMongoose = require('./config/configMongoose');
 const router = require('./controlers/travelControler');
 
 const cookieParser = require('cookie-parser');
+const auth = require('./middlewares/auth');
 
 
 const app = express();
@@ -16,6 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.set('views', './view');
 app.use(cookieParser());
+app.use(auth());
 
 app.use(router);
 

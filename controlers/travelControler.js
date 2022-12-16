@@ -23,6 +23,13 @@ router.post('/login', async (req, res) => {
     } catch (error) {
         res.render('login', { error })
     }
+});
+
+router.get('/logout', (req, res) => {
+    res.clearCookie('SESSION');
+    res.locals.user = {};
+    res.locals.isLoged = false;
+    res.status(200).redirect('/');
 })
 
 router.post('/register', async (req, res) => {
