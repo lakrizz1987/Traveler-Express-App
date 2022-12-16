@@ -1,6 +1,8 @@
 const { Router } = require('express');
+const { route } = require('express/lib/application');
 const Trip = require('../models/tripModel');
 const service = require('../services/services');
+const validator = require('validator');
 
 const router = Router();
 
@@ -12,6 +14,23 @@ router.get('/login', (req, res) => {
     res.render('login')
 })
 
+router.post('/register', async (req, res) => {
+    console.log(req.body.password)
+    const isStrongPass = validator.isStrongPassword(req.body.password,
+        { minLength: 6, minLowercase: 1, minUppercase: 1, minNumbers: 1 , minSymbols: 0});
+
+    try {
+        if(!isStrongPass){
+            throw {message:'Password must be minimum 8 characters long and contain uppercase and lowercase letters and numbers'}
+        }
+
+        const user = await service.registerUser(req.body);
+        res.render('login')
+    } catch (error) {
+        res.render('register', {error})
+    }
+})
+
 router.get('/register', (req, res) => {
     res.render('register')
 })
@@ -21,17 +40,16 @@ router.get('/create', (req, res) => {
 })
 
 router.post('/create', (req, res) => {
-    console.log(req.body)
+
     const trip = new Trip({ ...req.body })
 
     trip.save()
         .then(() => res.redirect('/trips'))
-        .catch((err) => alert(err.message))
+        .catch((err) => res.status(404).redirect('/404'))
 })
 
 router.get('/trips', async (req, res) => {
     const trips = await service.getAllTrips();
-    console.log(trips)
     res.render('trips', { trips: trips })
 })
 

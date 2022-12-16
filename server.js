@@ -4,13 +4,15 @@ const configHandlebars = require('./config/configHbs');
 const configMongoose = require('./config/configMongoose');
 const router = require('./controlers/travelControler');
 
+const bodyParser = require('body-parser');
+
 
 const app = express();
 
 configHandlebars(app);
 configMongoose(app);
 
-app.use(express.urlencoded({ extended: true }))
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.set('views', './view');
 app.use(router);
