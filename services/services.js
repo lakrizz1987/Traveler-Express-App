@@ -1,6 +1,7 @@
 const Trip = require('../models/tripModel');
 const User = require('../models/userModel');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const { SALT_ROUNDS, SECRET } = require('../config/serverConfig');
 
 
@@ -9,6 +10,7 @@ async function getAllTrips() {
 
     return trips;
 };
+
 
 async function registerUser(data) {
     const { username, password, repeatPassword } = data;
@@ -33,14 +35,32 @@ async function registerUser(data) {
                 throw { message: 'Something is wrong!' };
             };
 
-            const user = new User({ username: username, password: hash});
+            const user = new User({ username: username, password: hash });
             user.save();
         });
     })
 
 };
 
+async function loginUser(data) {
+    const { username, password } = data;
+
+    const searchedUser = await User.findOne({ username: username });
+
+    if (!searchedUser) throw { message: 'Wrong username or password!' };
+
+    const isValidPass = await bcrypt.compare(password, searchedUser.password);
+
+    if (isValidPass) {
+        const token = jwt.sign({ _id: searchedUser._id }, SECRET);
+        return token;
+    } else {
+        throw { message: 'Wrong username or password!' };
+    }
+}
+
 module.exports = {
     getAllTrips,
-    registerUser
+    registerUser,
+    loginUser
 }

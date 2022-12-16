@@ -14,20 +14,31 @@ router.get('/login', (req, res) => {
     res.render('login')
 })
 
+router.post('/login', async (req, res) => {
+    try {
+        const token = await service.loginUser(req.body);
+        res.cookie('SESSION', token);
+        res.redirect('/trips');
+
+    } catch (error) {
+        res.render('login', { error })
+    }
+})
+
 router.post('/register', async (req, res) => {
     console.log(req.body.password)
     const isStrongPass = validator.isStrongPassword(req.body.password,
-        { minLength: 6, minLowercase: 1, minUppercase: 1, minNumbers: 1 , minSymbols: 0});
+        { minLength: 6, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 0 });
 
     try {
-        if(!isStrongPass){
-            throw {message:'Password must be minimum 8 characters long and contain uppercase and lowercase letters and numbers'}
+        if (!isStrongPass) {
+            throw { message: 'Password must be minimum 8 characters long and contain uppercase and lowercase letters and numbers' }
         }
 
         const user = await service.registerUser(req.body);
         res.render('login')
     } catch (error) {
-        res.render('register', {error})
+        res.render('register', { error })
     }
 })
 
