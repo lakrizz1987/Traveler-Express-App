@@ -1,9 +1,10 @@
 .home-container{
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
     gap: 25px;
+    min-height: 60vh;
 }
 
 .home-container p{
