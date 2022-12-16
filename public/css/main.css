@@ -19,6 +19,7 @@ body {
 .header-title {
     display: flex;
     align-items: center;
+    min-width: 410px;
 }
 
 h1 {
