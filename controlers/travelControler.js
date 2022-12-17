@@ -65,7 +65,7 @@ router.get('/create', (req, res) => {
 
 
 router.post('/create', (req, res) => {
-    const trip = new Trip({ ...req.body })
+    const trip = new Trip({ ...req.body, creator: req.user._id })
 
     trip.save()
         .then(() => res.redirect('/trips'))
@@ -80,12 +80,19 @@ router.get('/trips', async (req, res) => {
 
 
 router.get('/details/:id', async (req, res) => {
+    let isOwner = false;
+
     try {
         const searchedTrip = await service.getOneById(req.params.id);
-        res.render('details',{searchedTrip});
+        
+        if (req.user) {
+            isOwner = req.user._id == searchedTrip.creator
+        }
+
+        res.render('details', { searchedTrip, isOwner });
 
     } catch (error) {
-
+        res.status(404).redirect('404')
     }
 });
 

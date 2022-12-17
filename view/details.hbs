@@ -5,7 +5,9 @@
         <p>{{searchedTrip.description}}</p>
         <p class="details-category"><span>Категория:</span>{{searchedTrip.category}}</p>
         <a class="btn-details" href="/trips">Назад</a>
+        {{#if isOwner}}
         <a class="btn-details" href="/edit/{{searchedTrip._id}}">Промени</a>
         <a class="btn-details" href="/delete/{{searchedTrip._id}}">Изтрий</a>
+        {{/if}}
     </div>
 </main>
