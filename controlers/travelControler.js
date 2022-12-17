@@ -86,14 +86,14 @@ router.get('/details/:id', async (req, res) => {
         const searchedTrip = await service.getOneById(req.params.id);
         
         if (req.user) {
-            isOwner = req.user._id == searchedTrip.creator
-        }
+            isOwner = req.user._id == searchedTrip.creator;
+        };
 
         res.render('details', { searchedTrip, isOwner });
 
     } catch (error) {
-        res.status(404).redirect('404')
-    }
+        res.status(404).redirect('/404');
+    };
 });
 
 
