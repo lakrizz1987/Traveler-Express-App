@@ -1,0 +1,11 @@
+<main class="details-container">
+    <h1>{{searchedTrip.name}}</h1>
+    <img class="details-image" src="{{searchedTrip.imageUrl}}" >
+    <div class="details">
+        <p>{{searchedTrip.description}}</p>
+        <p><span>Категория:</span>{{searchedTrip.category}}</p>
+        <a class="btn" href="/trips">Назад</a>
+        <a class="btn" href="/edit/{{searchedTrip._id}}">Промени</a>
+        <a class="btn" href="/delete/{{searchedTrip._id}}">Изтрий</a>
+    </div>
+</main>

@@ -11,6 +11,11 @@ async function getAllTrips() {
     return trips;
 };
 
+async function getOneById(id) {
+        const searchedTrip = await Trip.findById(id).lean();
+        return searchedTrip;
+};
+
 
 async function registerUser(data) {
     const { username, password, repeatPassword } = data;
@@ -61,6 +66,8 @@ async function loginUser(data) {
 
 module.exports = {
     getAllTrips,
+    getOneById,
     registerUser,
-    loginUser
+    loginUser,
+
 }
