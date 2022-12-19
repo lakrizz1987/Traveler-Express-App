@@ -22,8 +22,23 @@ async function getAllTripsBySearch(name) {
 }
 
 async function getOneById(id) {
-    const searchedTrip = await Trip.findById(id).lean();
-    return searchedTrip;
+    try {
+        const searchedTrip = await Trip.findById(id).lean();
+        return searchedTrip;
+
+    } catch (error) {
+        throw { message: "Oops something is wrong!" };
+    }
+};
+
+async function deleteOneById(id) {
+    try {
+        const deletedTrip = await Trip.findByIdAndDelete(id);
+        return deletedTrip;
+
+    } catch (error) {
+        throw { message: "Oops something is wrong!" }
+    }
 };
 
 
@@ -78,6 +93,7 @@ module.exports = {
     getAllTrips,
     getAllTripsBySearch,
     getOneById,
+    deleteOneById,
     registerUser,
     loginUser,
 

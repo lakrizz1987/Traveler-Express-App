@@ -4,6 +4,7 @@ const Trip = require('../models/tripModel');
 const service = require('../services/services');
 const validator = require('validator');
 
+
 const router = Router();
 
 router.get('/', (req, res) => {
@@ -12,12 +13,18 @@ router.get('/', (req, res) => {
 
 router.get('/search', async (req, res) => {
     try {
+        let noTrips = false;
         const trips = await service.getAllTripsBySearch(req.query.search);
-        res.render('trips', { trips: trips })
         
+        if(trips.length < 1){
+            noTrips = true;
+        };
+
+        res.render('trips', { trips: trips, noTrips: noTrips })
+
     } catch (err) {
-        
-        res.render('trips', { err : err.message })
+
+        res.render('trips', { err: err.message })
     }
 })
 
@@ -103,9 +110,21 @@ router.get('/details/:id', async (req, res) => {
         res.render('details', { searchedTrip, isOwner });
 
     } catch (error) {
-        res.status(404).redirect('/404');
+        res.render('404');
     };
 });
+
+
+router.get('/delete/:_id', async (req, res) => {
+    try {
+        
+        const deleted = await service.deleteOneById(req.params._id);
+        res.redirect('/trips');
+
+    } catch (error) {
+        res.render('404');
+    }
+})
 
 
 module.exports = router;

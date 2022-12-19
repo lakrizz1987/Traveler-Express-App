@@ -1,10 +1,13 @@
 <main>
     <form class="search-form" action="/search" method="">
-        <input type="text" class="search" name="search" placeholder="Search...">
+        <input type="text" class="search" name="search" placeholder="Търси по име...">
         <input type="submit" value="Търси">
     </form>
     {{#if err}}
     <h1>{{err}}</h1>
+    {{/if}}
+    {{#if noTrips}}
+    <h2>Sorry no trips!</h2>
     {{/if}}
     {{#each trips}}
     <section class="article-container">
