@@ -6,14 +6,18 @@ const { SALT_ROUNDS, SECRET } = require('../config/serverConfig');
 
 
 async function getAllTrips() {
-    const trips = await Trip.find({}).lean();
+    try {
+        const trips = await Trip.find({}).lean();
+        return trips;
+    } catch (error) {
+        throw { message: "Oops something is wrong!" }
+    }
 
-    return trips;
 };
 
 async function getAllTripsBySearch(name) {
     const trips = await getAllTrips()
-    const result =  trips.filter(trip => trip.name.toLowerCase().trim().includes(name.toLowerCase().trim()))
+    const result = trips.filter(trip => trip.name.toLowerCase().trim().includes(name.toLowerCase().trim()))
     return result
 }
 

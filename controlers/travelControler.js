@@ -14,8 +14,10 @@ router.get('/search', async (req, res) => {
     try {
         const trips = await service.getAllTripsBySearch(req.query.search);
         res.render('trips', { trips: trips })
+        
     } catch (err) {
-
+        
+        res.render('trips', { err : err.message })
     }
 })
 

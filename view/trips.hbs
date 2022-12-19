@@ -3,7 +3,9 @@
         <input type="text" class="search" name="search" placeholder="Search...">
         <input type="submit" value="Търси">
     </form>
-
+    {{#if err}}
+    <h1>{{err}}</h1>
+    {{/if}}
     {{#each trips}}
     <section class="article-container">
         <h1>{{name}}</h1>
