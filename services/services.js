@@ -11,9 +11,15 @@ async function getAllTrips() {
     return trips;
 };
 
+async function getAllTripsBySearch(name) {
+    const trips = await getAllTrips()
+    const result =  trips.filter(trip => trip.name.toLowerCase().trim().includes(name.toLowerCase().trim()))
+    return result
+}
+
 async function getOneById(id) {
-        const searchedTrip = await Trip.findById(id).lean();
-        return searchedTrip;
+    const searchedTrip = await Trip.findById(id).lean();
+    return searchedTrip;
 };
 
 
@@ -66,6 +72,7 @@ async function loginUser(data) {
 
 module.exports = {
     getAllTrips,
+    getAllTripsBySearch,
     getOneById,
     registerUser,
     loginUser,

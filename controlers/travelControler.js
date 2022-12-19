@@ -10,6 +10,15 @@ router.get('/', (req, res) => {
     res.render('home');
 });
 
+router.get('/search', async (req, res) => {
+    try {
+        const trips = await service.getAllTripsBySearch(req.query.search);
+        res.render('trips', { trips: trips })
+    } catch (err) {
+
+    }
+})
+
 
 router.get('/login', (req, res) => {
     res.render('login')
@@ -84,7 +93,7 @@ router.get('/details/:id', async (req, res) => {
 
     try {
         const searchedTrip = await service.getOneById(req.params.id);
-        
+
         if (req.user) {
             isOwner = req.user._id == searchedTrip.creator;
         };
