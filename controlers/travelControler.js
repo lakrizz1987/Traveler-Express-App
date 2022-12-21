@@ -15,8 +15,8 @@ router.get('/search', async (req, res) => {
     try {
         let noTrips = false;
         const trips = await service.getAllTripsBySearch(req.query.search);
-        
-        if(trips.length < 1){
+
+        if (trips.length < 1) {
             noTrips = true;
         };
 
@@ -97,11 +97,11 @@ router.get('/trips', async (req, res) => {
 });
 
 
-router.get('/details/:id', async (req, res) => {
+router.get('/details/:_id', async (req, res) => {
     let isOwner = false;
 
     try {
-        const searchedTrip = await service.getOneById(req.params.id);
+        const searchedTrip = await service.getOneById(req.params._id);
 
         if (req.user) {
             isOwner = req.user._id == searchedTrip.creator;
@@ -114,10 +114,21 @@ router.get('/details/:id', async (req, res) => {
     };
 });
 
+router.get('/edit/:_id', async (req, res) => {
+    try {
+        const searchedTrip = await service.getOneById(req.params._id);
+        
+        res.render('edit', { searchedTrip });
+
+    } catch (error) {
+        res.render('404');
+    };
+})
+
 
 router.get('/delete/:_id', async (req, res) => {
     try {
-        
+
         const deleted = await service.deleteOneById(req.params._id);
         res.redirect('/trips');
 

@@ -1,0 +1,21 @@
+<main>
+  <h1 class="login-reg-title">РЕДАКТИРАЙ</h1>
+  <div class="form">
+    <form action='/create' method="POST">
+      <label for="name">Име</label>
+      <input type="text" id="name" name="name" value="{{searchedTrip.name}}">
+      <label for="name">Описание</label>
+      <textarea id="name" name="description">{{searchedTrip.description}}</textarea>
+      <label for="image">Снмка</label>
+      <input type="text" id="image" name="imageUrl" value="{{searchedTrip.imageUrl}}">
+      <label for="difficulty">Категория</label>
+      <select id="category" name="category">
+        <option value="Море">Море</option>
+        <option value="Планина">Планина</option>
+        <option value="Град">Град</option>
+        <option value="Село">Село</option>
+      </select>
+      <input type="submit" value="РЕДАКТИРАЙ">
+    </form>
+  </div>
+</main>
