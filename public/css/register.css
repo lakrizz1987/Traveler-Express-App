@@ -80,7 +80,7 @@ input.difficulty {
 input[type=submit] {
     font-weight: 500;
     background-color: #000000;
-    border: none;
+    border: 1.5px solid black;
     padding: 8px;
     text-align: center;
     text-decoration: none;

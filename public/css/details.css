@@ -11,6 +11,15 @@
     margin-bottom: 30px;
 }
 
+#description::first-letter {
+    font-size: 35px;
+    font-weight: bold;
+    color: rgb(3, 0, 0);
+    margin-right: 1px;
+    
+    
+}
+
 .details-image{
     image-rendering: auto;
     width: 700px;
