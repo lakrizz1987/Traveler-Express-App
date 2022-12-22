@@ -22,6 +22,11 @@ body {
     min-width: 410px;
 }
 
+#main-title{
+    text-decoration: none;
+    color: inherit;
+}
+
 h1 {
     margin: 0;
     font-size: 36px;
