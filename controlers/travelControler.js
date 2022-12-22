@@ -8,7 +8,12 @@ const validator = require('validator');
 const router = Router();
 
 router.get('/', (req, res) => {
-    res.render('home');
+    try {
+        res.render('home');
+    } catch (error) {
+        res.render('500');
+    }
+
 });
 
 router.get('/search', async (req, res) => {
@@ -30,7 +35,12 @@ router.get('/search', async (req, res) => {
 
 
 router.get('/login', (req, res) => {
-    res.render('login')
+    try {
+        res.render('login')
+
+    } catch (error) {
+        res.render('500')
+    }
 });
 
 
@@ -47,10 +57,15 @@ router.post('/login', async (req, res) => {
 
 
 router.get('/logout', (req, res) => {
-    res.clearCookie('SESSION');
-    res.locals.user = {};
-    res.locals.isLoged = false;
-    res.status(200).redirect('/');
+    try {
+        res.clearCookie('SESSION');
+        res.locals.user = {};
+        res.locals.isLoged = false;
+        res.status(200).redirect('/');
+    } catch (error) {
+        res.render('500');
+    }
+
 });
 
 
@@ -61,7 +76,7 @@ router.post('/register', async (req, res) => {
 
     try {
         if (!isStrongPass) {
-            throw { message: 'Password must be minimum 8 characters long and contain uppercase and lowercase letters and numbers' }
+            throw { message: 'Паролата трябва да е минимум 8 символа дълга, да садържа големи,малки букви и цифри!' }
         }
 
         const user = await service.registerUser(req.body);
@@ -73,12 +88,22 @@ router.post('/register', async (req, res) => {
 
 
 router.get('/register', (req, res) => {
-    res.render('register')
+    try {
+        res.render('register')
+        
+    } catch (error) {
+        res.render('500')
+    }
 });
 
 
 router.get('/create', (req, res) => {
-    res.render('create')
+    try {
+        res.render('create')
+        
+    } catch (error) {
+        res.render('500')
+    }
 });
 
 
@@ -87,13 +112,19 @@ router.post('/create', (req, res) => {
 
     trip.save()
         .then(() => res.redirect('/trips'))
-        .catch((err) => res.status(404).redirect('/404'))
+        .catch((err) => res.status(500).redirect('/500'))
 });
 
 
 router.get('/trips', async (req, res) => {
-    const trips = await service.getAllTrips();
-    res.render('trips', { trips: trips })
+    try {
+        const trips = await service.getAllTrips();
+        res.render('trips', { trips: trips });
+
+    } catch (error) {
+        res.render('500')
+    };
+
 });
 
 
@@ -110,41 +141,52 @@ router.get('/details/:_id', async (req, res) => {
         res.render('details', { searchedTrip, isOwner });
 
     } catch (error) {
-        res.render('404');
+        res.render('500');
     };
 });
 
 router.get('/edit/:_id', async (req, res) => {
     try {
         const searchedTrip = await service.getOneById(req.params._id);
-
         res.render('edit', { searchedTrip });
 
     } catch (error) {
-        res.render('404');
+        res.render('500');
     };
 });
 
 router.post('/edit/:_id', async (req, res) => {
     try {
         const editedTrip = await service.getOneAndEdit(req.params._id, req.body);
-        res.redirect(`/details/${req.params._id}`)
+        res.redirect(`/details/${req.params._id}`);
+
     } catch (error) {
-        res.render('edit', { error })
-    }
+        res.render('edit', { error });
+    };
 })
 
 
 router.get('/delete/:_id', async (req, res) => {
     try {
-
         const deleted = await service.deleteOneById(req.params._id);
         res.redirect('/trips');
 
     } catch (error) {
-        res.render('404');
-    }
-})
+        res.render('500');
+    };
+});
+
+router.get('/404', (req, res) => {
+    res.render('404');
+});
+
+router.get('/500', (req, res) => {
+    res.render('500');
+});
+
+router.get('*', (req, res) => {
+    res.render('404');
+});
 
 
 module.exports = router;
