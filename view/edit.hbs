@@ -1,4 +1,7 @@
 <main>
+  {{#if error}}
+  <span class="error">{{error.message}}</span>
+  {{/if}}
   <h1 class="login-reg-title">РЕДАКТИРАЙ</h1>
   <div class="form">
     <form action='/edit/{{searchedTrip._id}}' method="POST">

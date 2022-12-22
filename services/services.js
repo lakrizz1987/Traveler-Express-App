@@ -10,7 +10,7 @@ async function getAllTrips() {
         const trips = await Trip.find({}).lean();
         return trips;
     } catch (error) {
-        throw { message: "Oops something is wrong!" }
+        throw { message: "Нещо се обърка, опитайте отново!" };
     }
 
 };
@@ -21,15 +21,24 @@ async function getAllTripsBySearch(name) {
     return result
 }
 
-async function getOneById(id) {
+async function getOneById(_id) {
     try {
-        const searchedTrip = await Trip.findById(id).lean();
+        const searchedTrip = await Trip.findById(_id).lean();
         return searchedTrip;
 
     } catch (error) {
-        throw { message: "Oops something is wrong!" };
+        throw { message: "Нещо се обърка, опитайте отново!" };
     }
 };
+
+async function getOneAndEdit(_id, updateValue) {
+    try {
+        const editedTrip = await Trip.findByIdAndUpdate(_id,updateValue);
+        return editedTrip;
+    } catch (error) {
+        throw { message: "Нещо се обърка, опитайте отново!" };
+    }
+}
 
 async function deleteOneById(id) {
     try {
@@ -37,7 +46,7 @@ async function deleteOneById(id) {
         return deletedTrip;
 
     } catch (error) {
-        throw { message: "Oops something is wrong!" }
+        throw { message: "Нещо се обърка, опитайте отново!" };
     }
 };
 
@@ -57,12 +66,12 @@ async function registerUser(data) {
 
     bcrypt.genSalt(SALT_ROUNDS, function (err, salt) {
         if (err) {
-            throw { message: 'Something is wrong!' };
+            throw { message: "Нещо се обърка, опитайте отново!" };
         };
 
         bcrypt.hash(password, salt, function (err, hash) {
             if (err) {
-                throw { message: 'Something is wrong!' };
+                throw { message: "Нещо се обърка, опитайте отново!" };
             };
 
             const user = new User({ username: username, password: hash });
@@ -93,6 +102,7 @@ module.exports = {
     getAllTrips,
     getAllTripsBySearch,
     getOneById,
+    getOneAndEdit,
     deleteOneById,
     registerUser,
     loginUser,

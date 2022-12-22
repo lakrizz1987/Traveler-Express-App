@@ -125,8 +125,13 @@ router.get('/edit/:_id', async (req, res) => {
     };
 });
 
-router.post('/edit/:_id', (req, res) => {
-    res.send(req.params)
+router.post('/edit/:_id', async (req, res) => {
+    try {
+        const editedTrip = await service.getOneAndEdit(req.params._id, req.body);
+        res.redirect(`/details/${req.params._id}`)
+    } catch (error) {
+        res.render('edit', { error })
+    }
 })
 
 
