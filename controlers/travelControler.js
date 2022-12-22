@@ -117,12 +117,16 @@ router.get('/details/:_id', async (req, res) => {
 router.get('/edit/:_id', async (req, res) => {
     try {
         const searchedTrip = await service.getOneById(req.params._id);
-        
+
         res.render('edit', { searchedTrip });
 
     } catch (error) {
         res.render('404');
     };
+});
+
+router.post('/edit/:_id', (req, res) => {
+    res.send(req.params)
 })
 
 

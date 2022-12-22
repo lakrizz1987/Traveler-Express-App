@@ -1,7 +1,7 @@
 <main>
   <h1 class="login-reg-title">РЕДАКТИРАЙ</h1>
   <div class="form">
-    <form action='/create' method="POST">
+    <form action='/edit/{{searchedTrip._id}}' method="POST">
       <label for="name">Име</label>
       <input type="text" id="name" name="name" value="{{searchedTrip.name}}">
       <label for="name">Описание</label>
