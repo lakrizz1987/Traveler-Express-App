@@ -3,6 +3,7 @@ const { Router } = require('express');
 const Trip = require('../models/tripModel');
 const service = require('../services/services');
 const validator = require('validator');
+const isNotLogged = require('../middlewares/isNotLogged');
 
 
 const router = Router();
@@ -56,7 +57,7 @@ router.post('/login', async (req, res) => {
 });
 
 
-router.get('/logout', (req, res) => {
+router.get('/logout', isNotLogged, (req, res) => {
     try {
         res.clearCookie('SESSION');
         res.locals.user = {};
@@ -90,24 +91,24 @@ router.post('/register', async (req, res) => {
 router.get('/register', (req, res) => {
     try {
         res.render('register')
-        
+
     } catch (error) {
         res.render('500')
     }
 });
 
 
-router.get('/create', (req, res) => {
+router.get('/create',isNotLogged, (req, res) => {
     try {
         res.render('create')
-        
+
     } catch (error) {
         res.render('500')
     }
 });
 
 
-router.post('/create', (req, res) => {
+router.post('/create',isNotLogged, (req, res) => {
     const trip = new Trip({ ...req.body, creator: req.user._id })
 
     trip.save()
@@ -145,7 +146,7 @@ router.get('/details/:_id', async (req, res) => {
     };
 });
 
-router.get('/edit/:_id', async (req, res) => {
+router.get('/edit/:_id',isNotLogged, async (req, res) => {
     try {
         const searchedTrip = await service.getOneById(req.params._id);
         res.render('edit', { searchedTrip });
@@ -155,7 +156,7 @@ router.get('/edit/:_id', async (req, res) => {
     };
 });
 
-router.post('/edit/:_id', async (req, res) => {
+router.post('/edit/:_id',isNotLogged, async (req, res) => {
     try {
         const editedTrip = await service.getOneAndEdit(req.params._id, req.body);
         res.redirect(`/details/${req.params._id}`);
@@ -166,7 +167,7 @@ router.post('/edit/:_id', async (req, res) => {
 })
 
 
-router.get('/delete/:_id', async (req, res) => {
+router.get('/delete/:_id',isNotLogged, async (req, res) => {
     try {
         const deleted = await service.deleteOneById(req.params._id);
         res.redirect('/trips');
