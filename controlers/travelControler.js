@@ -4,6 +4,7 @@ const Trip = require('../models/tripModel');
 const service = require('../services/services');
 const validator = require('validator');
 const isNotLogged = require('../middlewares/isNotLogged');
+const isLogged = require('../middlewares/isLogged');
 
 
 const router = Router();
@@ -35,7 +36,7 @@ router.get('/search', async (req, res) => {
 })
 
 
-router.get('/login', (req, res) => {
+router.get('/login',isLogged, (req, res) => {
     try {
         res.render('login')
 
@@ -45,7 +46,7 @@ router.get('/login', (req, res) => {
 });
 
 
-router.post('/login', async (req, res) => {
+router.post('/login',isLogged, async (req, res) => {
     try {
         const token = await service.loginUser(req.body);
         res.cookie('SESSION', token);
@@ -70,7 +71,7 @@ router.get('/logout', isNotLogged, (req, res) => {
 });
 
 
-router.post('/register', async (req, res) => {
+router.post('/register',isLogged, async (req, res) => {
 
     const isStrongPass = validator.isStrongPassword(req.body.password,
         { minLength: 6, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 0 });
@@ -88,7 +89,7 @@ router.post('/register', async (req, res) => {
 });
 
 
-router.get('/register', (req, res) => {
+router.get('/register',isLogged, (req, res) => {
     try {
         res.render('register')
 
