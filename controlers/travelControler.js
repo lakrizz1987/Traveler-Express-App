@@ -36,7 +36,7 @@ router.get('/search', async (req, res) => {
 })
 
 
-router.get('/login',isLogged, (req, res) => {
+router.get('/login', isLogged, (req, res) => {
     try {
         res.render('login')
 
@@ -46,7 +46,7 @@ router.get('/login',isLogged, (req, res) => {
 });
 
 
-router.post('/login',isLogged, async (req, res) => {
+router.post('/login', isLogged, async (req, res) => {
     try {
         const token = await service.loginUser(req.body);
         res.cookie('SESSION', token);
@@ -71,7 +71,7 @@ router.get('/logout', isNotLogged, (req, res) => {
 });
 
 
-router.post('/register',isLogged, async (req, res) => {
+router.post('/register', isLogged, async (req, res) => {
 
     const isStrongPass = validator.isStrongPassword(req.body.password,
         { minLength: 6, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 0 });
@@ -89,7 +89,7 @@ router.post('/register',isLogged, async (req, res) => {
 });
 
 
-router.get('/register',isLogged, (req, res) => {
+router.get('/register', isLogged, (req, res) => {
     try {
         res.render('register')
 
@@ -99,7 +99,7 @@ router.get('/register',isLogged, (req, res) => {
 });
 
 
-router.get('/create',isNotLogged, (req, res) => {
+router.get('/create', isNotLogged, (req, res) => {
     try {
         res.render('create')
 
@@ -109,7 +109,7 @@ router.get('/create',isNotLogged, (req, res) => {
 });
 
 
-router.post('/create',isNotLogged, (req, res) => {
+router.post('/create', isNotLogged, (req, res) => {
     const trip = new Trip({ ...req.body, creator: req.user._id })
 
     trip.save()
@@ -147,7 +147,8 @@ router.get('/details/:_id', async (req, res) => {
     };
 });
 
-router.get('/edit/:_id',isNotLogged, async (req, res) => {
+router.get('/edit/:_id', isNotLogged, async (req, res) => {
+    console.log(req.user)
     try {
         const searchedTrip = await service.getOneById(req.params._id);
         res.render('edit', { searchedTrip });
@@ -157,10 +158,15 @@ router.get('/edit/:_id',isNotLogged, async (req, res) => {
     };
 });
 
-router.post('/edit/:_id',isNotLogged, async (req, res) => {
+router.post('/edit/:_id', isNotLogged, async (req, res) => {
     try {
-        const editedTrip = await service.getOneAndEdit(req.params._id, req.body);
-        res.redirect(`/details/${req.params._id}`);
+        const trip = await service.getOneById(req.params._id);
+        if (trip.creator != req.user._id) {
+            throw { message: "Нямате права на достъп!" };
+        } else {
+            const editedTrip = await service.getOneAndEdit(req.params._id, req.body);
+            res.redirect(`/details/${req.params._id}`);
+        }
 
     } catch (error) {
         res.render('edit', { error });
@@ -168,10 +174,15 @@ router.post('/edit/:_id',isNotLogged, async (req, res) => {
 })
 
 
-router.get('/delete/:_id',isNotLogged, async (req, res) => {
+router.get('/delete/:_id', isNotLogged, async (req, res) => {
     try {
-        const deleted = await service.deleteOneById(req.params._id);
-        res.redirect('/trips');
+        const trip = await service.getOneById(req.params._id);
+        if (trip.creator != req.user._id) {
+            throw { message: "Нямате права на достъп!" };
+        } else {
+            const deleted = await service.deleteOneById(req.params._id);
+            res.redirect('/trips');
+        }
 
     } catch (error) {
         res.render('500');
