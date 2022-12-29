@@ -1,15 +1,23 @@
 @media screen and (max-width: 780px) {
-    .header-box{
+    body{
+        min-width: 410px;
+    }
+    .header-box {
         flex-direction: column;
         justify-content: center;
         padding: 0;
     }
-    .header-title{
+
+    .header-title {
         margin-top: 8px;
         justify-content: center;
     }
 
-    nav ul{
+    nav ul {
         gap: 5px
     }
-  }
+
+    .home-img{
+        max-width: 360px;
+    }
+}
