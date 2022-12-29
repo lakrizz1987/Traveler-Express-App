@@ -32,4 +32,9 @@ Live demo:
 
 <h2>Mobile view:</h2>
 
+![Screenshot6](https://user-images.githubusercontent.com/99616791/209953268-f7945159-6c2d-4282-ab38-fbcd08a0adf3.png)
+![Screenshot4](https://user-images.githubusercontent.com/99616791/209953271-6315c99f-f96f-46d8-9984-727b3ae8c136.png)
+![Screenshot5](https://user-images.githubusercontent.com/99616791/209953272-403b997a-0e7d-45ef-b5d2-f73ec86cbcf3.png)
+
+
 
