@@ -30,4 +30,6 @@ Live demo:
 ![Screenshot2](https://user-images.githubusercontent.com/99616791/209953122-49f46a52-79c9-45af-b695-49e5bfd76d79.png)
 ![Screenshot3](https://user-images.githubusercontent.com/99616791/209953130-bc684c75-9233-4ef6-abdc-4b00ce53a1da.png)
 
+<h2>Mobile view:</h2>
+
 
