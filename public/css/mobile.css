@@ -21,6 +21,10 @@
         max-width: 360px;
     }
 
+    .home-text{
+        text-align: center;
+    }
+
     main{
         margin: 0;
         padding: 0;
@@ -39,6 +43,10 @@
         min-width: 380px;
     }
 
+    .wraper-body {
+        padding: 20px 15px;
+    }
+
     .border{
         margin-top: 5px;
     }
@@ -52,5 +60,13 @@
     input[type='submit']{
         width: 100%;
         margin: 0;
+    }
+
+    .details-image{
+        max-width: 360px;
+    }
+
+    .btn-details{
+        width: 30%;
     }
 }
