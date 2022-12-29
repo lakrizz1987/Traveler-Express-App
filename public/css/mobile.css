@@ -20,4 +20,26 @@
     .home-img{
         max-width: 360px;
     }
+
+    main{
+        margin: 0;
+        padding: 0;
+    }
+
+    .article-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .article-text{
+        margin-top: 8px;
+        text-align: justify;
+        min-width: 380px;
+    }
+
+    .border{
+        margin-top: 5px;
+    }
 }
