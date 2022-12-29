@@ -27,4 +27,7 @@ Live demo:
 <h2>Desktop view:</h2>
 
 ![Screenshot1png](https://user-images.githubusercontent.com/99616791/209952602-50b7a5cb-917a-4c96-a4e0-99038ee60230.png)
+![Screenshot2](https://user-images.githubusercontent.com/99616791/209953122-49f46a52-79c9-45af-b695-49e5bfd76d79.png)
+![Screenshot3](https://user-images.githubusercontent.com/99616791/209953130-bc684c75-9233-4ef6-abdc-4b00ce53a1da.png)
+
 
