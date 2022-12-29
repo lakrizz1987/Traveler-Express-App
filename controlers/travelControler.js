@@ -148,7 +148,7 @@ router.get('/details/:_id', async (req, res) => {
 });
 
 router.get('/edit/:_id', isNotLogged, async (req, res) => {
-    console.log(req.user)
+    
     try {
         const searchedTrip = await service.getOneById(req.params._id);
         res.render('edit', { searchedTrip });
