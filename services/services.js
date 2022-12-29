@@ -55,13 +55,13 @@ async function registerUser(data) {
     const { username, password, repeatPassword } = data;
 
     if (password != repeatPassword) {
-        throw { message: 'Password mismatch!' };
+        throw { message: 'Паролата не съвпада!' };
     }
 
     const userNameExist = await User.findOne({ username: username }).lean() || false;
 
     if (userNameExist.username === username) {
-        throw { message: 'Username allready exist!' };
+        throw { message: 'Потребителското име е заето!' };
     }
 
     bcrypt.genSalt(SALT_ROUNDS, function (err, salt) {
@@ -86,7 +86,7 @@ async function loginUser(data) {
 
     const searchedUser = await User.findOne({ username: username });
 
-    if (!searchedUser) throw { message: 'Wrong username or password!' };
+    if (!searchedUser) throw { message: 'Грешно име или парола!' };
 
     const isValidPass = await bcrypt.compare(password, searchedUser.password);
 
@@ -94,7 +94,7 @@ async function loginUser(data) {
         const token = jwt.sign({ _id: searchedUser._id }, SECRET);
         return token;
     } else {
-        throw { message: 'Wrong username or password!' };
+        throw { message: 'Грешно име или парола!' };
     }
 }
 
