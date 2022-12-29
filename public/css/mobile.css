@@ -42,4 +42,15 @@
     .border{
         margin-top: 5px;
     }
+
+    div.form{
+        width: 80%;
+        padding: 0;
+        min-height: 400px;
+    }
+
+    input[type='submit']{
+        width: 100%;
+        margin: 0;
+    }
 }
