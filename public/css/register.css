@@ -16,20 +16,6 @@ h1 {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 span {
     font-weight: bolder;
     font-size: 17px;
@@ -107,6 +93,19 @@ div.form {
     padding: 20px;
     width: 45%;
     margin: auto;
+}
+
+.error-div{
+    text-align: center;
+    width: 100%;
+    background: #910320;
+    color: white;
+    border-radius: 2px;
+    padding: 5px;
+    animation: fadeOut 1s forwards;
+    animation-delay: 4s;
+    font-size: 18px;
+    margin-bottom: 10px;
 }
 
 span.error {
